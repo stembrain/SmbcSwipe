@@ -1,0 +1,1 @@
+javascript:(function(){var%20script=document.createElement('SCRIPT');script.type='text/javascript';script.src='http://www.stembrain.com/smbc_swipe.js';document.getElementsByTagName('head')[0].appendChild(script);})();
