@@ -1,0 +1,3 @@
+[submodule "jquery.swipe-events.js"]
+	path = jquery.swipe-events.js
+	url = https://github.com/eikes/jquery.swipe-events.js.git
