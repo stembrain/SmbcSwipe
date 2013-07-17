@@ -15,6 +15,7 @@ Installation
 ============
 Use index.php or something like it to provide a UI and instructions on how to create the bookmarklet, as well as the actual bookmarklet. 
 Once the bookmarklet is installed, go to smbc-comics.com then "go to" the bookmarklet. This activates the javascript in the bookmarklet.
+[Try it](http://stembrain.com/SmbcSwipe/)
 
 
 Developing
