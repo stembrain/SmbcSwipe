@@ -13,6 +13,26 @@ yepnope([
             console.log("previous comic URL " + previousUrl);
             console.log("next comic URL " + nextUrl);
             console.log("img URL " + imageUrl);
+
+	    // This JQuery scrolling plugin was modified from: http://lions-mark.com/jquery/scrollTo
+            $.fn.scrollTo = function( target, options, callback ){
+		  if(typeof options == 'function' && arguments.length == 2){ callback = options; options = target; }
+  		  var settings = $.extend({
+		    scrollTarget  : target,
+   		    offsetTop     : 50,
+		    duration      : 500,
+		    easing        : 'swing'
+  		  }, options);
+  		  return this.each(function(){
+		    var scrollPane = $(this);
+		    var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
+		    var scrollY = (typeof scrollTarget == "number") ? scrollTarget : scrollTarget.offset().top /*+ scrollPane.scrollTop() - parseInt(settings.offsetTop)*/;
+		    scrollPane.animate({scrollTop : scrollY }, parseInt(settings.duration), settings.easing, function(){
+		      if (typeof callback == 'function') { callback.call(this); }
+		    });
+		  });
+		}
+
             
             var previousFunction = function(){
                     var previousUrl = $('a.backRollover').attr('href');
@@ -49,6 +69,7 @@ yepnope([
 
                 console.log("fetch url is " + fetchUrl + " for mode " + mode);
                 $('#leftcolumn').load(fetchUrl + ' #leftcolumn', function(){ bindYourHeinie();} );
+		$('html, body').scrollTo('#comicnavtop');
             };
 
             var bindYourHeinie = function(){
