@@ -7,26 +7,7 @@ yepnope([
         load: 'http://www.stembrain.com/SmbcSwipe/jquery.swipe-events.js/js/jquery.swipe-events.js',
         callback: function(url, result, key){
             console.log('swipe events ready');
-            var previousUrl = $('a.backRollover').attr('href');
-            var nextUrl = $('a.nextRollover').attr('href');
-            var imageUrl = $('#comicimage img').attr('src');
-            console.log("previous comic URL " + previousUrl);
-            console.log("next comic URL " + nextUrl);
-            console.log("img URL " + imageUrl);
             
-            var previousFunction = function(){
-                    var previousUrl = $('a.backRollover').attr('href');
-                    $.get(previousUrl, function(html){
-                        $html = $(html);
-                        var newPrevious = $('a.backRollover', $html).attr('href');
-                        console.log('new previous url is ' + newPrevious);
-                        var newNext = $('a.nextRollover', $html).attr('href');
-                        console.log('new next url is ' + newNext);
-
-                        var newComicUrl = $('#comicimage img', $html).attr('src');
-                    });
-            };
-
             var replaceMain = function(mode){
                 if(mode != 'next' && mode != 'prev' && mode != 'rand'){
                     mode = 'prev';
@@ -47,8 +28,21 @@ yepnope([
                     fetchUrl = randomUrl;
                 }
 
+                $.get(fetchUrl, function(html){
+                    var newPreviousUrl = $('a.backRollover', html).attr('href');
+                    var newNextUrl = $('a.nextRollover', html).attr('href');
+                    var newRandomUrl = $('a.randomRollover', html).attr('href');
+                    var newImageSrc = $('#comicimage img', html).attr('src');
+                    console.log("Replace previous " + previousUrl + " with " + newPreviousUrl);
+                    $('a.backRollover').attr('href', newPreviousUrl);
+                    $('a.nextRollover').attr('href', newNextUrl);
+                    $('a.randomRollover').attr('href', newRandomUrl);
+                    $('#comicimage img')
+                        .attr('src', newImageSrc)
+                        .load(bindYourHeinie);
+
+                });
                 console.log("fetch url is " + fetchUrl + " for mode " + mode);
-                $('#leftcolumn').load(fetchUrl + ' #leftcolumn', function(){ bindYourHeinie();} );
             };
 
             var bindYourHeinie = function(){
@@ -62,6 +56,7 @@ yepnope([
             };
 
             bindYourHeinie();
+            $('#rightcolumn, #header').remove();
         }
     }
 ]);
