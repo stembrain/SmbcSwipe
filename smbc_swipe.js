@@ -2,20 +2,19 @@
 yepnope([
     { 
         load : 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'
-	},
+    },
     {
-        load: 'http://www.stembrain.com/SmbcSwipe/jquery.swipe-events.js/js/jquery.swipe-events.js',
-        callback: function(url, result, key){
-            console.log('swipe events ready');
+	load : 'http://www.canadienx.org/SmbcSwipe/TouchSwipe-Jquery-Plugin/jquery.touchSwipe.js',
+	callback: function(url, result, key) {
+	    console.log('touchSwipe events ready');
             var previousUrl = $('a.backRollover').attr('href');
-            var nextUrl = $('a.nextRollover').attr('href');
-            var imageUrl = $('#comicimage img').attr('src');
-            console.log("previous comic URL " + previousUrl);
-            console.log("next comic URL " + nextUrl);
-            console.log("img URL " + imageUrl);
-            
+	    var nextUrl = $('a.nextRollover').attr('href');
+	    var imageUrl = $('#comicimage img').attr('src');
+	    console.log("previous comic URL " + previousUrl);
+	    console.log("next comic URL " + nextUrl);
+	    console.log("img URL " + imageUrl);
+
             var previousFunction = function(){
-                    var previousUrl = $('a.backRollover').attr('href');
                     $.get(previousUrl, function(html){
                         $html = $(html);
                         var newPrevious = $('a.backRollover', $html).attr('href');
@@ -48,21 +47,27 @@ yepnope([
                 }
 
                 console.log("fetch url is " + fetchUrl + " for mode " + mode);
-                $('#leftcolumn').load(fetchUrl + ' #leftcolumn', function(){ bindYourHeinie();} );
+                $('#leftcolumn').load(fetchUrl + ' #leftcolumn', function(){ bindYourHeinie(); } );
             };
 
-            var bindYourHeinie = function(){
-                console.log('binding swipes');
-                $('#comicimage')
-                    .click(function(){ replaceMain('prev'); })
-                    .swipeEvents()
-                    .bind("swipeLeft",  function(){ replaceMain('next'); })
-                    .bind("swipeRight", function(){ replaceMain('prev'); })
-                    .bind("swipeUp",    function(){ replaceMain('rand'); });
-            };
+	    var bindYourHeinie = function() {
+		console.log('binding swipes');
+		$('#comicimage').swipe( {
+		    swipeLeft: function(event, direction, distance, duration, fingerCount) {
+			replaceMain('next');
+		    },
+		    swipeRight: function(event, direction, distance, duration, fingerCount) {
+			replaceMain('prev');
+		    },
+		    swipeUp: function(event, direction, distance, duration, fingerCount) {
+			replaceMain('rand');
+		    },
+		    fingers: 1
+	    	});
+	    };
 
-            bindYourHeinie();
-        }
+	    bindYourHeinie();
+	}
     }
 ]);
 
