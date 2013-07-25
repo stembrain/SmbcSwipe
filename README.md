@@ -7,7 +7,7 @@ The bookmarklet attempts to add swipe gesture interaction to the online comic sm
 
 - Swipe left on the comic to see the previous comic.
 - Swipe right on the comic to see the next comic.
-- Swipe up on the comic to see a random comic.
+- TODO: Swipe up on the comic to see a random comic.
 
 
 
