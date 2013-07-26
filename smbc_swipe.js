@@ -35,7 +35,7 @@ yepnope([
         }
 	},
     {
-        load: 'http://www.stembrain.com/SmbcSwipe/jquery.swipe-events.js/js/jquery.swipe-events.js',
+        load: 'http://www.stembrain.com/SmbcSwipe/TouchSwipe-Jquery-Plugin/jquery.touchSwipe.js',
         callback: function(url, result, key){
             console.log('swipe events ready');
 
@@ -69,22 +69,27 @@ yepnope([
                     $('a.nextRollover').attr('href', newNextUrl);
                     $('a.randomRollover').attr('href', newRandomUrl);
                     $('#comicimage img')
-                    .attr('src', newImageSrc)
-                    .load(function(){
-                        $('html, body').scrollTo('#comicnavtop');    
-                    });
+                    .attr('src', newImageSrc);
                 });
             };
 
-            var bindYourHeinie = function(){
-                console.log('binding swipes');
-                $('#comicimage img')
-                    .click(function(){ replaceMain('rand'); })
-                    .swipeEvents()
-                    .bind("swipeLeft",  function(){ replaceMain('next'); })
-                    .bind("swipeRight", function(){ replaceMain('prev'); });
-                    //The jumpToRandom() smbc js indicates that we can strictly
-                    //use numbers to navigate between comics
+	    var bindYourHeinie = function() {
+		$('#comicimage').swipe( {
+		    	swipeLeft: function(event, direction, distance, duration, fingerCount) {
+				replaceMain('next');
+		    	},
+		    	swipeRight: function(event, direction, distance, duration, fingerCount) {
+				replaceMain('prev');
+		    	},
+		    	swipeUp: function(event, direction, distance, duration, fingerCount) {
+				replaceMain('rand');
+		    	},
+			maxTimeThreshold: 1000,
+		    	fingers: 1
+	    	})
+		.load(function() {
+                        $('html, body').scrollTo('#comicnavtop'); 
+		});
             }();
 
             $('#rightcolumn, #header').remove();
