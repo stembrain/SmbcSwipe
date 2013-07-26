@@ -69,10 +69,7 @@ yepnope([
                     $('a.nextRollover').attr('href', newNextUrl);
                     $('a.randomRollover').attr('href', newRandomUrl);
                     $('#comicimage img')
-                    .attr('src', newImageSrc)
-                    .load(function(){
-                        $('html, body').scrollTo('#comicnavtop');    
-                    });
+                    .attr('src', newImageSrc);
                 });
             };
 
@@ -89,7 +86,10 @@ yepnope([
 		    	},
 			maxTimeThreshold: 1000,
 		    	fingers: 1
-	    	});
+	    	})
+		.load(function() {
+                        $('html, body').scrollTo('#comicnavtop'); 
+		});
             }();
 
             $('#rightcolumn, #header').remove();
