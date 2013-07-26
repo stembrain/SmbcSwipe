@@ -51,21 +51,20 @@ yepnope([
             };
 
 	    var bindYourHeinie = function() {
-		console.log('binding swipes');
-		$('#comicimage').swipe( {
-		    swipeLeft: function(event, direction, distance, duration, fingerCount) {
-			replaceMain('next');
-		    },
-		    swipeRight: function(event, direction, distance, duration, fingerCount) {
-			replaceMain('prev');
-		    },
-		    swipeUp: function(event, direction, distance, duration, fingerCount) {
-			replaceMain('rand');
-		    },
-		    fingers: 1
+			$('#comicimage').swipe( {
+		    	swipeLeft: function(event, direction, distance, duration, fingerCount) {
+					replaceMain('next');
+		    	},
+		    	swipeRight: function(event, direction, distance, duration, fingerCount) {
+					replaceMain('prev');
+		    	},
+		    	swipeUp: function(event, direction, distance, duration, fingerCount) {
+					replaceMain('rand');
+		    	},
+				maxTimeThreshold: 1000,
+		    	fingers: 1
 	    	});
 	    };
-
 	    bindYourHeinie();
 	}
     }
