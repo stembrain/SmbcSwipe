@@ -35,7 +35,7 @@ yepnope([
         }
 	},
     {
-        load: 'http://www.canadienx.org/SmbcSwipe/TouchSwipe-Jquery-Plugin/jquery.touchSwipe.js',
+        load: 'http://www.stembrain.com/SmbcSwipe/TouchSwipe-Jquery-Plugin/jquery.touchSwipe.js',
         callback: function(url, result, key){
             console.log('swipe events ready');
 
